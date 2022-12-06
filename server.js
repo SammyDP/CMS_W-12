@@ -1,18 +1,24 @@
-const inquirer = require("inquirer");
+const db = require("./db/connection");
 const express = require("express");
-const db = require("mysql-promise")();
-const cTable = require("console.table");
-
+const startInquirer = require("./lib/departments");
 const PORT = process.env.PORT || 3001;
-
 const app = express();
-//boilerplate... connect to database
-db.configure(
-  {
-    host: "localhost",
-    user: "root",
-    password: "Insert Password Here",
-    database: "tracker_db",
-  },
-  console.log(`Connected to the tracker_db database.`)
-);
+
+// express middleware
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+// Default response for any other request (Not found)
+app.use((req, res) => {
+  res.status(404).end();
+});
+
+// Start server after DB connection
+db.connect((err) => {
+  if (err) throw err;
+  console.log("Database connected.");
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+    startInquirer();
+  });
+});

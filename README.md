@@ -2,7 +2,7 @@
 
 <h1 align="center">
 
-[Employee Tracker]()
+[Employee Tracker](https://emptrackr.herokuapp.com/)
 
 </h1>
 
@@ -60,7 +60,7 @@
 
 # Links
 
-[Heroku Deployment]()
+[Heroku Deployment](https://emptrackr.herokuapp.com/)
 
 <p>&nbsp;</p>
 
